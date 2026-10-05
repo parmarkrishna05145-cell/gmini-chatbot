@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "photoURL": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      },
+      "required": ["userId", "email", "createdAt"]
+    },
+    "StudyNote": {
+      "title": "StudyNote",
+      "description": "A study question, generated explanation, and user bookmarks",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "question": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "answer": {
+          "type": "string",
+          "maxLength": 30000
+        },
+        "topic": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "isSaved": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "required": ["userId", "question", "answer", "isSaved", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores private user profile documents"
+    },
+    "/studyNotes/{noteId}": {
+      "schema": "StudyNote",
+      "description": "Stores study questions and answers for each student"
+    }
+  }
+}
